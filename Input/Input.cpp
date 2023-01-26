@@ -7,24 +7,32 @@
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
 
+bool Input::PushKey(BYTE KeyNumber)
+{
+	// 指定キーを押していればtrueを返す
+	if (key[KeyNumber]) { return true; };
+	return false;
+}
+
+bool Input::TriggerKey(BYTE keyNumber)
+{
+	if (key[keyNumber] != keyPre[keyNumber]) { return true; };
+	return false;
+}
+
 void Input::Initialize(HINSTANCE hInstance, HWND hwnd)
 {
 	HRESULT result;
 
 	// DirectInputのインスタンス生成
-	ComPtr<IDirectInput8> directInput = nullptr;
 	result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
-
 	// キーボードデバイスの生成
-	//ComPtr<IDirectInputDevice8> keyboard;
 	result = directInput->CreateDevice(GUID_SysKeyboard, &keyboard, NULL);
 	assert(SUCCEEDED(result));
-
 	// 入力データ形式のセット
 	result = keyboard->SetDataFormat(&c_dfDIKeyboard);	// 標準形式
 	assert(SUCCEEDED(result));
-
 	// 排他制御レベルのセット
 	result = keyboard->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 	assert(SUCCEEDED(result));
@@ -32,10 +40,12 @@ void Input::Initialize(HINSTANCE hInstance, HWND hwnd)
 
 void Input::Update()
 {
-	// キーボード情報の取得情報
-	keyboard->Acquire();
+	HRESULT result;
 
+	// 前回のキー入力を保存
+	memcpy(keyPre, key, sizeof(key));
+	// キーボード情報の取得開始
+	result = keyboard->Acquire();
 	// 全キーの入力状態を取得する
-	BYTE key[256] = {};
-	keyboard->GetDeviceState(sizeof(key), key);
+	result = keyboard->GetDeviceState(sizeof(key), key);
 }
