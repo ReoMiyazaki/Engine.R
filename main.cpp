@@ -1,3 +1,5 @@
+#include "Input.h"
+
 #include "Global.h"
 #include "Struct.h"
 #include <random>
@@ -329,26 +331,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 
-	// DirectInputの初期化
-	IDirectInput8* directInput = nullptr;
-	result = DirectInput8Create(
-		w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8,
-		(void**)&directInput, nullptr);
-	assert(SUCCEEDED(result));
+	// ポインタ
+	Input* input = nullptr;
 
-	// キーボードデバイスの生成
-	IDirectInputDevice8* keyboard = nullptr;
-	result = directInput->CreateDevice(GUID_SysKeyboard, &keyboard, NULL);
-	assert(SUCCEEDED(result));
+	// 入力の初期化
+	input = new Input();
+	input->Initialize(w.hInstance, hwnd);
 
-	// 入力データ形式のセット
-	result = keyboard->SetDataFormat(&c_dfDIKeyboard);	// 標準形式
-	assert(SUCCEEDED(result));
-
-	// 排他制御レベルのセット
-	result = keyboard->SetCooperativeLevel(
-		hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
-	assert(SUCCEEDED(result));
 
 	// DirectX初期化処理 ここまで
 #pragma endregion
@@ -1175,6 +1164,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 	}
+
+	delete input;
 
 	// ウィンドウクラスの解除
 	UnregisterClass(w.lpszClassName, w.hInstance);
