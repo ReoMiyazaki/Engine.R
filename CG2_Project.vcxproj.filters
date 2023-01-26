@@ -16,10 +16,19 @@
     <Filter Include="シェーダーファイル">
       <UniqueIdentifier>{141af0b9-60cb-40ad-81f4-3f0bc4656679}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Input">
+      <UniqueIdentifier>{f2c2a565-cc9a-4911-8409-b4fe1b933f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{18a6d67d-ca95-4a88-b12f-80c2612de740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="Struct.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>ヘッダー ファイル\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
