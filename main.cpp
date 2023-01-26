@@ -990,20 +990,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		input->Update();
 
 		// 数字の0キーが押されていたら
-		//if (key[DIK_0]) {
-		//	OutputDebugStringA("Hit 0\n");	// 出力ウィンドウに「HIt 0」と表示
-		//}
+		if (input->TriggerKey(DIK_0)) {
+			OutputDebugStringA("Hit 0\n");	// 出力ウィンドウに「HIt 0」と表示
+		}
 
 		// ESCを押したときゲームループを抜ける
-		//if (key[DIK_ESCAPE]) { break; }
+		if (input->PushKey(DIK_ESCAPE)) { break; }
 
 #pragma region ターゲットの周りを回るカメラ
 
 		// ターゲットの周りを回るカメラ
-		/*if (key[DIK_D] || key[DIK_A])
+		if (input->PushKey(DIK_D) || input->PushKey(DIK_A))
 		{
-			if (key[DIK_D]) { angle += XMConvertToRadians(1.0f); }
-			else if (key[DIK_A]) { angle -= XMConvertToRadians(1.0f); }*/
+			if (input->PushKey(DIK_D)) { angle += XMConvertToRadians(1.0f); }
+			else if (input->PushKey(DIK_A)) { angle -= XMConvertToRadians(1.0f); }
 
 			// angleラジアンだけY軸周りに回転。半径は-100
 			eye.x = -100 * sinf(angle);
@@ -1011,19 +1011,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			// ビュー変換行列を作り直す
 			matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
-		//}
+		}
 
 #pragma endregion
 #pragma region 移動処理
 
 		// いずれかのキーを押していたら
-		/*if (key[DIK_UP] || key[DIK_DOWN] || key[DIK_RIGHT] || key[DIK_LEFT])
+		if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT))
 		{
-			if (key[DIK_UP]) { object3ds[0].position.z += 1.0f; }
-			else if (key[DIK_DOWN]) { object3ds[0].position.z -= 1.0f; }
-			if (key[DIK_RIGHT]) { object3ds[0].position.x += 1.0f; }
-			else if (key[DIK_LEFT]) { object3ds[0].position.x -= 1.0f; }
-		}*/
+			if (input->PushKey(DIK_UP)) { object3ds[0].position.z += 1.0f; }
+			else if (input->PushKey(DIK_DOWN)) { object3ds[0].position.z -= 1.0f; }
+			if (input->PushKey(DIK_RIGHT)) { object3ds[0].position.x += 1.0f; }
+			else if (input->PushKey(DIK_LEFT)) { object3ds[0].position.x -= 1.0f; }
+		}
 		for (size_t i = 0; i < _countof(object3ds); i++)
 		{
 			UpdataObject3d(&object3ds[i], matView, matProjection);
@@ -1105,7 +1105,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
 
 		// スペースを押したとき画像を切り替える
-		//if (key[DIK_SPACE]) { srvGpuHandle.ptr += incrementSize; }
+		if (input->PushKey(DIK_SPACE)) { srvGpuHandle.ptr += incrementSize; }
 
 //		srvGpuHandle.ptr += incrementSize;
 
