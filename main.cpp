@@ -548,7 +548,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 頂点シェーダーオブジェクトの読み込み
 	result = D3DCompileFromFile(
-		L"BasicVS.hlsl",	// シェーダーファイル名
+		L"Resources/shaders/BasicVS.hlsl",	// シェーダーファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,					// インクルードを可能にする
 		"main", "vs_5_0",									// エントリーポイント名、シェーダーモデル指定
@@ -575,7 +575,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ピクセルシェーダーの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		L"BasicPS.hlsl",	// シェーダーファイル名
+		L"Resources/shaders/BasicPS.hlsl",	// シェーダーファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,					// インクルードを可能にする
 		"main", "ps_5_0",									// エントリーポイント名、シェーダーモデル指定
@@ -1121,9 +1121,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
 
 		// スペースを押したとき画像を切り替える
-//		if (key[DIK_SPACE]) { srvGpuHandle.ptr += incrementSize; }
+		if (key[DIK_SPACE]) { srvGpuHandle.ptr += incrementSize; }
 
-		srvGpuHandle.ptr += incrementSize;
+//		srvGpuHandle.ptr += incrementSize;
 
 		// SRVヒープの先頭にあるSRVをルートパラメータ1番に設定
 		commandList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
