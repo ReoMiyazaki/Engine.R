@@ -33,6 +33,12 @@ public: // メンバ関数
 
 	HINSTANCE GetInstance() { return w.hInstance; }
 
+	/// <summary>
+	/// メッセージの処理
+	/// </summary>
+	/// <returns>終了かどうか</returns>
+	bool ProcessMessage();
+
 private:
 	HWND hwnd = nullptr;	// ウィンドウハンドル
 	WNDCLASSEX w{};	// ウィンドウクラスの設定
