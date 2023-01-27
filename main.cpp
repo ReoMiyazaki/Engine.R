@@ -947,14 +947,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	while (true) {
 #pragma region ウィンドウメッセージ処理
-		// メッセージがあるか
-		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-			TranslateMessage(&msg);	// キー入力メッセージの処理
-			DispatchMessageW(&msg);	// プロシージャにメッセージを送る
+		// メッセージ処理
+		if (winApp->ProcessMessage())
+		{
+			// ゲームループを抜ける
+			break;
 		}
-
-		// xボタンで終了メッセージが来たらゲームループを向ける
-		if (msg.message == WM_QUIT) { break; }
 #pragma endregion
 
 #pragma region DirectX毎フレーム処理
