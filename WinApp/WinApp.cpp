@@ -44,3 +44,9 @@ void WinApp::Initialize()
 void WinApp::Update()
 {
 }
+
+void WinApp::Finalize()
+{
+	// ウィンドウズクラスを登録解除
+	UnregisterClass(w.lpszClassName, w.hInstance);
+}
