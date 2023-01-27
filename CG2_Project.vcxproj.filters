@@ -22,11 +22,11 @@
     <Filter Include="ソース ファイル\Input">
       <UniqueIdentifier>{18a6d67d-ca95-4a88-b12f-80c2612de740}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\WinApp">
-      <UniqueIdentifier>{36545a47-2ad7-45aa-9936-31f6e3dddebc}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\base">
+      <UniqueIdentifier>{9030e09e-9a92-4095-b7d6-bd0984bc026f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\WinApp">
-      <UniqueIdentifier>{28c7ff04-092d-4a87-a707-d43a39be557e}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\base">
+      <UniqueIdentifier>{b859b573-eded-4d54-8b3a-e78536ac438d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,8 +36,11 @@
     <ClCompile Include="Input\Input.cpp">
       <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
-    <ClCompile Include="WinApp\WinApp.cpp">
-      <Filter>ソース ファイル\WinApp</Filter>
+    <ClCompile Include="base\DirectCommon.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\WinApp.cpp">
+      <Filter>ソース ファイル\base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +53,11 @@
     <ClInclude Include="Input\Input.h">
       <Filter>ヘッダー ファイル\Input</Filter>
     </ClInclude>
-    <ClInclude Include="WinApp\WinApp.h">
-      <Filter>ヘッダー ファイル\WinApp</Filter>
+    <ClInclude Include="base\DirectCommon.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\WinApp.h">
+      <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
