@@ -209,7 +209,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// スワップチェーンの生成
 	result = dxgiFactory->CreateSwapChainForHwnd(
 		commandQueue.Get(),
-		hwnd,
+		winApp->GetHwnd(),
 		&swapChainDesc,
 		nullptr,
 		nullptr,
@@ -259,8 +259,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// リソース設定
 	D3D12_RESOURCE_DESC depthResourceDesc{};
 	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	depthResourceDesc.Width = window_width;		// レンダーターゲットに合わせる
-	depthResourceDesc.Height = window_hright;	// レンダーターゲットに合わせる
+	depthResourceDesc.Width = WinApp::window_width;;		// レンダーターゲットに合わせる
+	depthResourceDesc.Height = WinApp::window_hright;	// レンダーターゲットに合わせる
 	depthResourceDesc.DepthOrArraySize = 1;
 	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT;	// 深度値フォーマット
 	depthResourceDesc.SampleDesc.Count = 1;
@@ -308,7 +308,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 入力の初期化
 	input = new Input();
-	input->Initialize(w.hInstance, hwnd);
+	input->Initialize(winApp->GetInstance(), winApp->GetHwnd());
 
 
 	// DirectX初期化処理 ここまで
@@ -757,7 +757,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	XMMATRIX matProjection =
 		XMMatrixPerspectiveFovLH(
 			XMConvertToRadians(45.0f),				// 上下画角45度
-			(float)window_width / window_hright,	// アスペクト比(画面横幅/画面縦幅)
+			(float)WinApp::window_width / WinApp::window_hright,	// アスペクト比(画面横幅/画面縦幅)
 			0.1f, 1000.0f							// 前端、奥端
 		);
 #pragma endregion
@@ -1035,8 +1035,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// ピューポート設定コマンド
 		D3D12_VIEWPORT viewport{};
-		viewport.Width = window_width;		// 横幅
-		viewport.Height = window_hright;	// 縦幅
+		viewport.Width = WinApp::window_width;		// 横幅
+		viewport.Height = WinApp::window_hright;	// 縦幅
 		viewport.TopLeftX = 0;				// 左上X
 		viewport.TopLeftY = 0;				// 左上Y
 		viewport.MinDepth = 0.0f;			// 最小震度(0でよい)
