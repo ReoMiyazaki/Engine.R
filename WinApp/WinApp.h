@@ -21,6 +21,11 @@ public: // メンバ関数
 	void Update();
 
 	/// <summary>
+	/// 終了
+	/// </summary>
+	void Finalize();
+
+	/// <summary>
 	/// ウィンドウハンドルの取得
 	/// </summary>
 	/// <returns></returns>

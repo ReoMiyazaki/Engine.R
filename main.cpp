@@ -308,7 +308,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 入力の初期化
 	input = new Input();
-	input->Initialize(winApp->GetInstance(), winApp->GetHwnd());
+	input->Initialize(winApp);
 
 
 	// DirectX初期化処理 ここまで
@@ -1048,9 +1048,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// シザー矩形
 		D3D12_RECT scissorRect{};
 		scissorRect.left = 0;									// 切り抜き座標左
-		scissorRect.right = scissorRect.left + window_width;	// 切り抜き座標右
+		scissorRect.right = scissorRect.left + WinApp::window_width;	// 切り抜き座標右
 		scissorRect.top = 0;									// 切り抜き座標上
-		scissorRect.bottom = scissorRect.top + window_hright;	// 切り抜き座標下
+		scissorRect.bottom = scissorRect.top + WinApp::window_hright;	// 切り抜き座標下
 
 		// シザー矩形設定をコマンドリストに積む
 		commandList->RSSetScissorRects(1, &scissorRect);
@@ -1133,11 +1133,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 	// 入力解放
 	delete input;
-	// windowAPI解放
-	delete winApp;
+	input = nullptr;
 
 	// ウィンドウクラスの解除
-	UnregisterClass(w.lpszClassName, w.hInstance);
+	winApp->Finalize();
+
+	// windowAPI解放
+	delete winApp;
+	winApp = nullptr;
+
 	return 0;
 }
 
