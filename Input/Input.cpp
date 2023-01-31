@@ -1,9 +1,5 @@
 #include "Input.h"
 #include <cassert>
-//#include <wrl.h>
-//using namespace Microsoft::WRL;
-//#define DIRECTINPUT_VERSION	0x0800	// DirectInput‚Ìƒo[ƒWƒ‡ƒ“
-//#include <dinput.h>
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
 

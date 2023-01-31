@@ -8,10 +8,11 @@
 // 入力
 class Input
 {
-public:
+private:
 	// namespace省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+public:
 	/// <summary>
 	/// キーの押下をチェック
 	/// </summary>
